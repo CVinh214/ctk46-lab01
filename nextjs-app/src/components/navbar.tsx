@@ -10,31 +10,33 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Dự án" },
   { href: "/contact", label: "Liên hệ" },
+  { href: "/guestbook", label: "Sổ lưu bút" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") {
+      return "light";
+    }
 
-  useEffect(() => {
     const savedTheme = window.localStorage.getItem("theme");
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
-    const initialTheme =
-      savedTheme === "dark" || (savedTheme !== "light" && prefersDark)
-        ? "dark"
-        : "light";
 
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
-  }, []);
+    return savedTheme === "dark" || (savedTheme !== "light" && prefersDark)
+      ? "dark"
+      : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
-    window.localStorage.setItem("theme", nextTheme);
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
 
   return (
