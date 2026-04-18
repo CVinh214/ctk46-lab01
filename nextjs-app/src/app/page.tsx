@@ -38,9 +38,9 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="mb-16 flex justify-center">
+      {/* <div className="mb-16 flex justify-center">
         <Counter />
-      </div>
+      </div> */}
 
       {/* Skills section */}
       <div className="mb-20">
