@@ -17,47 +17,49 @@ export default async function ProjectDetailPage({
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-4 py-12 space-y-6">
       <Link
         href="/projects"
-        className="text-emerald-600 dark:text-emerald-400 hover:underline text-sm mb-8 inline-block"
+        className="inline-block text-sm font-medium text-emerald-600 hover:underline dark:text-emerald-400"
       >
         ← Quay lại danh sách dự án
       </Link>
 
-      <article>
-        <div className="flex items-center gap-4 mb-6">
-          <span className="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-            Dự án {project.date}
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs px-2.5 py-1 rounded-md border border-gray-200 dark:border-gray-700"
-              >
-                {t}
-              </span>
-            ))}
+      <article className="space-y-6">
+        <div className="rounded-2xl border border-emerald-100 bg-linear-to-r from-emerald-50 to-white p-6 shadow-sm dark:border-emerald-900/40 dark:from-emerald-950/20 dark:to-gray-950">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white">
+              Dự án {project.date}
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-md border border-emerald-200 bg-white px-2.5 py-1 text-xs text-emerald-700 dark:border-emerald-900 dark:bg-gray-900 dark:text-emerald-300"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
+
+          <h1 className="text-4xl font-extrabold leading-tight text-gray-900 dark:text-gray-100">
+            {project.title}
+          </h1>
         </div>
 
-        <h1 className="text-4xl font-extrabold mb-6 text-gray-900 dark:text-gray-100 leading-tight">
-          {project.title}
-        </h1>
-
-        <div className="prose max-w-none dark:prose-invert text-gray-700 dark:text-gray-300 whitespace-pre-line text-lg leading-relaxed mb-10">
+        <div className="prose max-w-none whitespace-pre-line rounded-2xl border bg-card p-6 text-lg leading-relaxed text-gray-700 shadow-sm dark:prose-invert dark:text-gray-300">
           {project.fullDescription}
         </div>
 
         {project.link && (
-          <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
-            <h3 className="text-xl font-bold mb-4">Liên kết hữu ích</h3>
+          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-bold">Liên kết hữu ích</h3>
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors shadow-md hover:shadow-lg"
+              className="inline-flex items-center rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 hover:shadow-lg"
             >
               Truy cập Dự án / Source Code
               <svg

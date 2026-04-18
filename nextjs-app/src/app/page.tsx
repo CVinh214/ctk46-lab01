@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Counter from "@/components/counter";
 
 export default function HomePage() {
   return (
@@ -79,7 +78,7 @@ export default function HomePage() {
       </div>
 
       {/* CTA section */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-3xl p-10 text-center text-white shadow-xl">
+      <div className="bg-linear-to-r from-emerald-600 to-emerald-800 rounded-3xl p-10 text-center text-white shadow-xl">
         <h2 className="text-3xl font-bold mb-4">Đọc Blog của tôi</h2>
         <p className="text-emerald-100 mb-8 max-w-xl mx-auto text-lg">
           Nơi tôi chia sẻ những kiến thức mới học được về Next.JS, Supabase và

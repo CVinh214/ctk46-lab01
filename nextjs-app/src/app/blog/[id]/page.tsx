@@ -44,49 +44,68 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const author = await getUser(post.userId);
 
   return (
-    <div>
+    <div className="space-y-6">
       <Link
         href="/blog"
-        className="text-blue-600 hover:underline text-sm mb-6 inline-block"
+        className="inline-block text-sm font-medium text-emerald-600 hover:underline dark:text-emerald-400"
       >
         ← Quay lại danh sách
       </Link>
-      <article>
-        <h1 className="text-3xl font-bold mb-4 capitalize">{post.title}</h1>
-        <div className="flex items-center gap-3 mb-6 text-sm text-gray-500">
-          <span>
-            Tác giả:{" "}
-            <strong className="text-gray-700">{author.name}</strong>
-          </span>
-          <span>•</span>
-          <span>{author.email}</span>
-        </div>
-        <div className="prose max-w-none text-gray-700 whitespace-pre-line mb-8 leading-relaxed">
+
+      <article className="space-y-6">
+        <section className="rounded-2xl border border-emerald-100 bg-linear-to-r from-emerald-50 to-white p-6 shadow-sm dark:border-emerald-900/40 dark:from-emerald-950/20 dark:to-gray-950">
+          <h1 className="mb-4 text-3xl font-bold capitalize text-gray-900 dark:text-gray-100">
+            {post.title}
+          </h1>
+          <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+            <span className="rounded-full bg-white px-3 py-1 font-medium dark:bg-gray-900">
+              Bài #{post.id}
+            </span>
+            <span>
+              Tác giả:{" "}
+              <strong className="text-gray-800 dark:text-gray-100">
+                {author.name}
+              </strong>
+            </span>
+            <span>•</span>
+            <span>{author.email}</span>
+          </div>
+        </section>
+
+        <div className="prose max-w-none whitespace-pre-line rounded-2xl border bg-card p-6 leading-relaxed text-gray-700 shadow-sm dark:text-gray-300">
           {post.body}
         </div>
-        <div className="border-t pt-6">
+
+        <div className="rounded-2xl border bg-card p-6 shadow-sm">
           <h3 className="font-semibold mb-2">Về tác giả</h3>
-          <p className="text-gray-600 text-sm">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             <strong>{author.name}</strong> (@{author.username}) —
             {author.company.name}
           </p>
-          <p className="text-gray-500 text-sm">{author.company.catchPhrase}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {author.company.catchPhrase}
+          </p>
         </div>
 
-        <div className="mt-12 border-t pt-8">
-          <h3 className="text-2xl font-bold mb-6">
+        <div className="rounded-2xl border bg-card p-6 shadow-sm">
+          <h3 className="mb-6 text-2xl font-bold">
             Bình luận ({comments.length})
           </h3>
           <div className="space-y-6">
             {comments.map((comment) => (
-              <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-blue-700">
+              <div
+                key={comment.id}
+                className="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900/40"
+              >
+                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                  <span className="font-semibold text-emerald-700 dark:text-emerald-300">
                     {comment.name}
                   </span>
                   <span className="text-xs text-gray-500">{comment.email}</span>
                 </div>
-                <p className="text-gray-700 text-sm italic">&quot;{comment.body}&quot;</p>
+                <p className="text-sm italic text-gray-700 dark:text-gray-300">
+                  &quot;{comment.body}&quot;
+                </p>
               </div>
             ))}
           </div>

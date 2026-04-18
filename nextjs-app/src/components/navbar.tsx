@@ -9,9 +9,10 @@ const navLinks = [
   { href: "/about", label: "Giới thiệu" },
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Dự án" },
+  { href: "/pokemon", label: "Pokémon" },
   { href: "/contact", label: "Liên hệ" },
-  { href: "/guestbook", label: "Sổ lưu bút" },
-];
+  { href: "/guestbook", label: "Sổ lưu bút" }
+  ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -33,6 +33,23 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Kiểm tra trùng lặp trong vòng 1 phút
+  const now = new Date();
+  const oneMinuteAgo = new Date(now.getTime() - 60000);
+  
+  const isDuplicate = guestbookEntries.some(entry => 
+    entry.name === body.name && 
+    entry.message === body.message && 
+    new Date(entry.createdAt) > oneMinuteAgo
+  );
+
+  if (isDuplicate) {
+    return NextResponse.json(
+      { error: "Bạn vừa gửi lời nhắn này rồi. Vui lòng đợi 1 phút." },
+      { status: 429 },
+    );
+  }
+
   // Tạo entry mới
   const newEntry = {
     id: Date.now().toString(),
